@@ -185,7 +185,7 @@ namespace Red.CookieSessions
                 var existingCookie = request.Cookies[_manager._tokenName];
                 var newCookie = _manager.RenewSession(existingCookie);
                 if (newCookie != "")
-                    request.UnderlyingRequest.HttpContext.Response.Headers.Add("Set-Cookie", newCookie);
+                    request.UnderlyingRequest.HttpContext.Response.Headers["Set-Cookie"] = newCookie;
             }
 
             /// <summary>
@@ -195,7 +195,7 @@ namespace Red.CookieSessions
             public void Close(Request request)
             {
                 if (_manager.CloseSession(request.Cookies[_manager._tokenName], out var cookie))
-                    request.UnderlyingRequest.HttpContext.Response.Headers.Add("Set-Cookie", cookie);
+                    request.UnderlyingRequest.HttpContext.Response.Headers["Set-Cookie"] = cookie;
             }
         }
     }
