@@ -16,24 +16,31 @@ class MySession
     public string Username;
 }
 ...
+public static async Task Auth(Request req, Response res)
+{
+    if (req.GetSession<Session>() == null)
+    {
+        await res.SendStatus(HttpStatusCode.Unauthorized);
+    }
+}
+...
+server.Use(new CookieSessions<MySession>(new CookieSessionSettings(TimeSpan.FromDays(1))));
 
-server.Use(new CookieSessions<MySession>(new CookieSessionSettings(TimeSpan.FromDays(1))
-{   // We allow unauthenticated users to send requests to /login, so we can authenticate them
-    ShouldAuthenticate = path => path != "/login" // We allow people to send requests without a valid Authorization to /login, where we can authenticate them
-}));
+ 
+
 server.Post("/login", async (req, res) =>
 {
     var form = await res.GetFormDataAsync();
-    if (ValidForm(form) && Authenticate(form["username"], form["password"]))
+    if (ValidForm(form) && Login(form["username"], form["password"]))
     {
-        req.OpenSession(new MySession {Username = form["username"]}); // Here we just have the username as session-data
+        req.OpenSession(new MySession {Username = form["username"]});
         await res.SendStatus(HttpStatusCode.OK);
     }
     else 
         await res.SendStatus(HttpStatusCode.BadRequest);
 });
 // Only authenticated users are allowed to /friends
-server.Get("/friends", async (req, res) => 
+server.Get("/friends", Auth, async (req, res) => 
 {
     var session = req.GetSession<MySession>();
     var friends = database.GetFriendsOfUser(session.Username);
