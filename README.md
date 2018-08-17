@@ -15,7 +15,9 @@ class MySession
 {
     public string Username;
 }
+
 ...
+
 public static async Task Auth(Request req, Response res)
 {
     if (req.GetSession<Session>() == null)
@@ -23,10 +25,10 @@ public static async Task Auth(Request req, Response res)
         await res.SendStatus(HttpStatusCode.Unauthorized);
     }
 }
-...
-server.Use(new CookieSessions<MySession>(new CookieSessionSettings(TimeSpan.FromDays(1))));
 
- 
+...
+
+server.Use(new CookieSessions<MySession>(new CookieSessionSettings(TimeSpan.FromDays(1))));
 
 server.Post("/login", async (req, res) =>
 {
@@ -39,6 +41,7 @@ server.Post("/login", async (req, res) =>
     else 
         await res.SendStatus(HttpStatusCode.BadRequest);
 });
+
 // Only authenticated users are allowed to /friends
 server.Get("/friends", Auth, async (req, res) => 
 {
@@ -46,6 +49,7 @@ server.Get("/friends", Auth, async (req, res) =>
     var friends = database.GetFriendsOfUser(session.Username);
     await res.SendJson(friends);
 });
+
 server.Post("/logout", async (req, res) => 
 {
     req.GetSession<MySession>().Close();
