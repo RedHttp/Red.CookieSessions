@@ -7,12 +7,12 @@
         /// </summary>
         /// <param name="request"></param>
         /// <param name="sessionData"></param>
-        public static void OpenSession<TSession>(this Request request, TSession sessionData)
+        public static void OpenSession<TSession>(this Request request, in TSession sessionData)
         {
             var existing = request.GetSession<TSession>();
             existing?.Close(request);
 
-            var manager = request.ServerPlugins.Get<CookieSessions<TSession>>();
+            var manager = request.ServerPlugins.Get<CookieSessions>();
             var cookie = manager.OpenSession(sessionData);
             request.UnderlyingRequest.HttpContext.Response.Headers["Set-Cookie"] =  cookie;
         }
@@ -21,9 +21,9 @@
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public static CookieSessions<TSession>.CookieSession GetSession<TSession>(this Request request)
+        public static CookieSession GetSession<TSession>(this Request request)
         {
-            return request.GetData<CookieSessions<TSession>.CookieSession>();
+            return request.GetData<CookieSession<TSession>>();
         }
     }
 }
