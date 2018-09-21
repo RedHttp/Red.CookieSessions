@@ -129,7 +129,7 @@ namespace Red.CookieSessions
             return id.ToString();
         }
 
-        internal string OpenSession<TSession>(in TSession sessionData)
+        internal string OpenSession<TSession>(TSession sessionData)
         {
             var id = GenerateToken();
             var exp = DateTime.UtcNow.Add(_settings.SessionLength);

@@ -7,7 +7,7 @@
         /// </summary>
         /// <param name="request"></param>
         /// <param name="sessionData"></param>
-        public static void OpenSession<TSession>(this Request request, in TSession sessionData)
+        public static void OpenSession<TSession>(this Request request, TSession sessionData)
         {
             var existing = request.GetSession<TSession>();
             existing?.Close(request);
@@ -21,7 +21,7 @@
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public static CookieSession GetSession<TSession>(this Request request)
+        public static CookieSession<TSession> GetSession<TSession>(this Request request)
         {
             return request.GetData<CookieSession<TSession>>();
         }
