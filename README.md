@@ -46,7 +46,7 @@ server.Post("/login", async (req, res) =>
 server.Get("/friends", Auth, async (req, res) => 
 {
     var session = req.GetSession<MySession>();
-    var friends = database.GetFriendsOfUser(session.Username);
+    var friends = database.GetFriendsOfUser(session.Data.Username);
     await res.SendJson(friends);
 });
 
