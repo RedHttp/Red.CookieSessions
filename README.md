@@ -28,11 +28,11 @@ public static async Task Auth(Request req, Response res)
 
 ...
 
-server.Use(new CookieSessions<MySession>(new CookieSessionSettings(TimeSpan.FromDays(1))));
+server.Use(new CookieSessions(new CookieSessionSettings(TimeSpan.FromDays(1))));
 
 server.Post("/login", async (req, res) =>
 {
-    var form = await res.GetFormDataAsync();
+    var form = await req.GetFormDataAsync();
     if (ValidForm(form) && Login(form["username"], form["password"]))
     {
         req.OpenSession(new MySession {Username = form["username"]});
