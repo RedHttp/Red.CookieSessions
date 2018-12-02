@@ -20,7 +20,7 @@ class MySession
 
 public static async Task Auth(Request req, Response res)
 {
-    if (req.GetSession<Session>() == null)
+    if (req.GetSession<MySession>() == null)
     {
         await res.SendStatus(HttpStatusCode.Unauthorized);
     }
