@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.1.1</Version>
+    <Version>2.2.0</Version>
     <Authors>Malte Rosenbjerg</Authors>
     <Company />
     <Description>Simple session management middleware for RedHttpServer. Uses cookies with authentication tokens</Description>
@@ -15,7 +15,7 @@
     <PackageTags>red redhttpserver cookiesession session rhttpserver</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Minor bug fixed</PackageReleaseNotes>
-    <LangVersion>7.2</LangVersion>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="RHttpServer" Version="3.5.2" />

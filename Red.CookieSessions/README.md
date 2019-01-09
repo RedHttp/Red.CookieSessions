@@ -15,10 +15,15 @@ class MySession
 {
     public string Username;
 }
-
 ...
 
-public static async Task Auth(Request req, Response res)
+var server = new RedHttpServer();
+server.Use(new CookieSessions<MySession>(new CookieSessionSettings<MySession>(TimeSpan.FromDays(1))
+{
+    Secure = false
+}));
+
+async Task Auth(Request req, Response res)
 {
     if (req.GetSession<MySession>() == null)
     {
@@ -26,16 +31,18 @@ public static async Task Auth(Request req, Response res)
     }
 }
 
-...
-
-server.Use(new CookieSessions(new CookieSessionSettings(TimeSpan.FromDays(1))));
+server.Get("/login", async (req, res) =>
+{
+    await req.OpenSession(new MySession {Username = "test"});
+    await res.SendStatus(HttpStatusCode.OK);
+});
 
 server.Post("/login", async (req, res) =>
 {
     var form = await req.GetFormDataAsync();
     if (ValidForm(form) && Login(form["username"], form["password"]))
     {
-        req.OpenSession(new MySession {Username = form["username"]});
+        await req.OpenSession(new MySession {Username = form["username"]});
         await res.SendStatus(HttpStatusCode.OK);
     }
     else 
@@ -46,15 +53,17 @@ server.Post("/login", async (req, res) =>
 server.Get("/friends", Auth, async (req, res) => 
 {
     var session = req.GetSession<MySession>();
-    var friends = database.GetFriendsOfUser(session.Data.Username);
+    var friends = GetFriendsOfUser(session.Data.Username);
     await res.SendJson(friends);
 });
 
 server.Post("/logout", async (req, res) => 
 {
-    req.GetSession<MySession>().Close();
+    await req.GetSession<MySession>().Close(req);
     await res.SendStatus(HttpStatusCode.OK);
 });
+
+await server.RunAsync();
 ```
 
 #### Implementation

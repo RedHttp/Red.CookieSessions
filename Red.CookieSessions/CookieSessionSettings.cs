@@ -15,7 +15,6 @@ namespace Red.CookieSessions
         public bool Secure = true;
         public SameSiteSetting SameSite = SameSiteSetting.Strict;
         public string TokenName = "session_token";
-        public ICookieStore Store = new InMemoryCookieStore();
         public TimeSpan ReapInterval = TimeSpan.FromMinutes(15);
 
         /// <summary>

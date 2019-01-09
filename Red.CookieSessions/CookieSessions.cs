@@ -13,9 +13,12 @@ namespace Red.CookieSessions
     /// <summary>
     ///     RedMiddleware for CookieSessions
     /// </summary>
-    public class CookieSessions : IRedMiddleware, IRedWebSocketMiddleware
+    public class CookieSessions<TCookieSession> : IRedMiddleware, IRedWebSocketMiddleware
     {
-        /// <summary>chro
+        public ICookieStore<TCookieSession> Store = new InMemoryCookieStore<TCookieSession>();
+        
+        
+        /// <summary>
         /// Constructor for CookieSession Middleware
         /// </summary>
         /// <param name="settings">Settings object</param>
@@ -54,20 +57,20 @@ namespace Red.CookieSessions
         /// <summary>
         ///     Do not invoke. Is invoked by the server with every websocket request
         /// </summary>
-        public async Task Process(Request req, WebSocketDialog wsd, Response res) => await Task.Run(() => Authenticate(req, res));
+        public Task Process(Request req, WebSocketDialog wsd, Response res) => Authenticate(req, res);
 
         /// <summary>
         ///     Do not invoke. Is invoked by the server with every request
         /// </summary>
-        public async Task Process(Request req, Response res) => await Task.Run(() => Authenticate(req, res));
+        public Task Process(Request req, Response res) => Authenticate(req, res);
 
         // Simple maintainer loop
         private async void ReapLoop()
         {
             while (true)
             {
+                await Store.RemoveExpired();
                 await Task.Delay(_settings.ReapInterval);
-                _settings.Store.RemoveExpired();
             }
         }
 
@@ -77,44 +80,40 @@ namespace Red.CookieSessions
         /// <param name="req">The given request</param>
         /// <param name="res">The response for the request</param>
         /// <returns>True when valid</returns>
-        public void Authenticate(Request req, Response res)
+        public async Task Authenticate(Request req, Response res)
         {
             if (!req.Cookies.ContainsKey(_tokenName) || req.Cookies[_tokenName] == "")
             {
                 return;
             }
 
-            if (!TryAuthenticateToken(req.Cookies[_tokenName], out var session))
+            var auth = await TryAuthenticateToken(req.Cookies[_tokenName]);
+            if (!auth.Item1)
             {
                 res.AddHeader("Set-Cookie", _expiredCookie);
                 return;
             }
 
+            var session = auth.Item2;
+
             if (_settings.AutoRenew)
             {
-                session.Renew(req);
+                await session.Renew(req);
             }
             
             req.SetData(session);
 
         }
 
-        private bool TryAuthenticateToken(string token, out CookieSession data)
+        private async Task<Tuple<bool, CookieSession<TCookieSession>>> TryAuthenticateToken(string token)
         {
-            if (!_settings.Store.TryGet(token, out var session))
+            var got = await Store.TryGet(token);
+            if (!got.Item1 || got.Item2.Expires <= DateTime.Now)
             {
-                data = null;
-                return false;
-            }
-            else if (session.Expires >= DateTime.Now)
-            {
-                
-                data = null;
-                return false;
+                return new Tuple<bool, CookieSession<TCookieSession>>(false, null);
             }
 
-            data = session;
-            return true;
+            return new Tuple<bool, CookieSession<TCookieSession>>(true, got.Item2);
         }
 
         private string GenerateToken()
@@ -129,30 +128,33 @@ namespace Red.CookieSessions
             return id.ToString();
         }
 
-        internal string OpenSession<TSession>(TSession sessionData)
+        internal async Task<string> OpenSession(TCookieSession sessionData)
         {
             var id = GenerateToken();
             var exp = DateTime.UtcNow.Add(_settings.SessionLength);
-            _settings.Store.Set(id, new CookieSession<TSession>(sessionData, exp, this));
+            await Store.Set(id, new CookieSession<TCookieSession>(sessionData, exp));
             return $"{_tokenName}={id};{_cookie} Expires={exp:R}";
         }
 
-        internal string RenewSession(string token)
+        internal async Task<string> RenewSession(string token)
         {
-            if (!_settings.Store.TryGet(token, out var session))
+            var got = await Store.TryGet(token);
+            if (!got.Item1)
             {
                 return "";
             }
+
+            var session = got.Item2;
             session.Expires = DateTime.UtcNow.Add(_settings.SessionLength);
-            _settings.Store.Set(token, session);
+            await Store.Set(token, session);
             return $"{_tokenName}={token};{_cookie} Expires={session.Expires:R}";
         }
 
-        internal bool CloseSession(string token, out string cookie)
+        internal Task<bool> CloseSession(string token, out string cookie)
         {
             cookie = _expiredCookie;
-            return _settings.Store.TryRemove(token);
+            return Store.TryRemove(token);
         }
-
+        
     }
 }

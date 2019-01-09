@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c760193f-c46d-4ca4-87a9-22dc276152b0" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1143754252">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="cs" value="18" />
+          <entry key="md" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="C#" value="18" />
+          <entry key="PLAIN_TEXT" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="cs" value="1967" />
+          <entry key="md" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="C#" value="1967" />
+          <entry key="PLAIN_TEXT" value="5" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/Program.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="16">
+              <caret line="37" column="12" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="12" />
+              <folding>
+                <marker date="1547023779268" expanded="true" signature="6:115" ph="..." />
+                <marker date="1547023779268" expanded="true" signature="131:2184" ph="{...}" />
+                <marker date="1547023779268" expanded="true" signature="151:2182" ph="{...}" />
+                <marker date="1547023779268" expanded="true" signature="178:234" ph="{...}" />
+                <marker date="1547023779268" expanded="true" signature="288:2176" ph="{...}" />
+                <marker date="1547023779268" expanded="true" signature="559:605" ph="{...}" />
+                <marker date="1547023779268" expanded="true" signature="699:888" ph="{...}" />
+                <marker date="1547023779268" expanded="true" signature="767:874" ph="{...}" />
+                <marker date="1547023779268" expanded="true" signature="1006:1280" ph="{...}" />
+                <marker date="1547023779268" expanded="true" signature="1336:1597" ph="{...}" />
+                <marker date="1547023779268" expanded="true" signature="1654:1920" ph="{...}" />
+                <marker date="1547023779268" expanded="true" signature="1983:2127" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Red.CookieSessions/CookieSessionExtensions.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+              <folding>
+                <marker date="1547022658569" expanded="true" signature="59:1211" ph="{...}" />
+                <marker date="1547022658569" expanded="true" signature="109:1209" ph="{...}" />
+                <marker date="1547022658569" expanded="true" signature="124:323" ph="///     Opens a new session and adds cookie for authentication.  ... " />
+                <marker date="1547022658569" expanded="true" signature="434:789" ph="{...}" />
+                <marker date="1547022658569" expanded="true" signature="798:1013" ph="///     Gets the session-object attached to the request, added by the CookieSessions middleware ... " />
+                <marker date="1547022658569" expanded="true" signature="1114:1203" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../RedHttpServer.CSharp/src/RedHttpServer/Request.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="77" selection-start-line="77" selection-end-line="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Red.CookieSessions/CookieSession.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <marker date="1546974665241" expanded="false" signature="6:43" ph="..." />
+                <marker date="1546974665241" expanded="true" signature="73:1568" ph="{...}" />
+                <marker date="1546974665241" expanded="true" signature="123:1566" ph="{...}" />
+                <marker date="1546974665241" expanded="true" signature="205:287" ph="{...}" />
+                <marker date="1546974665241" expanded="true" signature="297:346" ph="///  ... " />
+                <marker date="1546974665241" expanded="true" signature="456:604" ph="///    Renews the session expiry time and updates the cookie ... " />
+                <marker date="1546974665241" expanded="true" signature="653:1033" ph="{...}" />
+                <marker date="1546974665241" expanded="true" signature="1043:1179" ph="///    Closes the session and updates the cookie ... " />
+                <marker date="1546974665241" expanded="true" signature="1228:1560" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Red.CookieSessions/CookieSessions.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="116" column="9" selection-start-line="116" selection-start-column="9" selection-end-line="116" selection-end-column="9" />
+              <folding>
+                <marker date="1547022988745" expanded="true" signature="6:202" ph="..." />
+                <marker date="1547022988745" expanded="true" signature="232:5584" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="239:316" ph="///     RedMiddleware for CookieSessions ... " />
+                <marker date="1547022988745" expanded="true" signature="406:5582" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="534:682" ph="/// Constructor for CookieSession Middleware ... " />
+                <marker date="1547022988745" expanded="true" signature="744:1455" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="1816:1925" ph="///     Do not invoke. Is invoked by the server when it starts.  ... " />
+                <marker date="1547022988745" expanded="true" signature="1978:2041" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="2051:2172" ph="///     Do not invoke. Is invoked by the server with every websocket request ... " />
+                <marker date="1547022988745" expanded="true" signature="2285:2396" ph="///     Do not invoke. Is invoked by the server with every request ... " />
+                <marker date="1547022988745" expanded="true" signature="2551:2727" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="2586:2717" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="2737:3049" ph="/// Authenticates a request and sets the sessionData if valid, and responds with 401 when invalid ... " />
+                <marker date="1547022988745" expanded="true" signature="3115:3688" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="3212:3264" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="3370:3483" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="3560:3630" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="3795:4126" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="3919:4031" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="4166:4579" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="4656:4935" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="4999:5392" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="5086:5141" ph="{...}" />
+                <marker date="1547022988745" expanded="true" signature="5467:5567" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Red.CookieSessions/InMemoryCookieStore.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="448">
+              <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
+              <folding>
+                <marker date="1545003683106" expanded="false" signature="6:99" ph="..." />
+                <marker date="1545003683106" expanded="true" signature="129:1264" ph="{...}" />
+                <marker date="1545003683106" expanded="true" signature="215:1262" ph="{...}" />
+                <marker date="1545003683106" expanded="true" signature="441:711" ph="{...}" />
+                <marker date="1545003683106" expanded="true" signature="616:701" ph="{...}" />
+                <marker date="1545003683106" expanded="true" signature="795:855" ph="{...}" />
+                <marker date="1545003683106" expanded="true" signature="947:1125" ph="{...}" />
+                <marker date="1545003683106" expanded="true" signature="1182:1256" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Red.CookieSessions/ICookieStore.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="18" column="75" lean-forward="true" selection-start-line="18" selection-start-column="75" selection-end-line="18" selection-end-column="75" />
+              <folding>
+                <marker date="1547023967816" expanded="false" signature="6:43" ph="..." />
+                <marker date="1547023967816" expanded="true" signature="73:1287" ph="{...}" />
+                <marker date="1547023967816" expanded="true" signature="125:1285" ph="{...}" />
+                <marker date="1547023967816" expanded="true" signature="140:430" ph="/// For attempting to get the session for the given token ... " />
+                <marker date="1547023967816" expanded="true" signature="527:785" ph="/// For attempting to remove a session from the session store ... " />
+                <marker date="1547023967816" expanded="true" signature="847:1074" ph="/// Insert, or update, the session for a given token ... " />
+                <marker date="1547023967816" expanded="true" signature="1163:1249" ph="/// Remove all sessions that have expired ... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Test/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Red.CookieSessions/CookieSession.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C9CF421-6377-47C5-BF2C-FCDC7E2498E2/f5/b0c7d2c4/Request.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Red.CookieSessions/InMemoryCookieStore.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Red.CookieSessions/ICookieStore.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Red.CookieSessions/CookieSessionExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../RedHttpServer.CSharp/src/RedHttpServer/Request.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Red.CookieSessions/CookieSessions.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/InMemoryCookieStore.cs" />
+        <option value="$PROJECT_DIR$/CookieSessionExtensions.cs" />
+        <option value="$PROJECT_DIR$/Test/Class1.cs" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/ICookieStore.cs" />
+        <option value="$PROJECT_DIR$/CookieSession.cs" />
+        <option value="$PROJECT_DIR$/CookieSessionSettings.cs" />
+        <option value="$PROJECT_DIR$/CookieSessions.cs" />
+        <option value="$PROJECT_DIR$/Red.CookieSessions/CookieSessionExtensions.cs" />
+        <option value="$PROJECT_DIR$/Red.CookieSessions/CookieSessions.cs" />
+        <option value="$PROJECT_DIR$/Test/Program.cs" />
+        <option value="$PROJECT_DIR$/Red.CookieSessions/ICookieStore.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="-49" />
+    <option name="width" value="1920" />
+    <option name="height" value="1129" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="SolutionExplorer" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="SolutionExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="Red.CookieSessions" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="Red.CookieSessions" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Red.CookieSessions" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="Red.CookieSessions" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Test" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-all-files" value="false" />
+      </pane>
+      <pane id="FileSystemExplorer" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../KollektivApp/OsteklokkenServer/OsteklokkenServer.sln" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Test/bin/Debug/netcoreapp2.1/Test.dll" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <envs>
+        <env name="ASPNETCORE_ENVIRONMENT" value="Development" />
+        <env name="ASPNETCORE_URLS" value="http://localhost:5000" />
+      </envs>
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Test/Test.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v2.1" />
+      <browser url="http://localhost:5000" />
+      <method v="2">
+        <option name="Build" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26066098" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32939914" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39914164" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="NuGet" order="7" weight="0.29077253" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Unit Tests" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="Build" order="13" weight="0.32939914" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Errors In Solution" order="3" />
+      <window_info anchor="right" id="Unit Tests Coverage" order="4" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" suspend="NONE" type="DotNet Exception Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C9CF421-6377-47C5-BF2C-FCDC7E2498E2/f5/b0c7d2c4/Request.cs</url>
+          <line>112</line>
+          <properties documentPath="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C9CF421-6377-47C5-BF2C-FCDC7E2498E2/f5/b0c7d2c4/Request.cs" initialLine="112">
+            <startOffsets>
+              <option value="3184" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3236" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/obj/Debug/netstandard2.0/Red.CookieSessions.AssemblyInfo.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/Class1.cs" />
+    <entry file="file://$PROJECT_DIR$/CookieSessionExtensions.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" column="86" selection-start-line="16" selection-start-column="86" selection-end-line="16" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CookieSession.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="5" selection-start-line="5" selection-end-line="44" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CookieSessionSettings.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InMemoryCookieStore.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="39" column="1" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ICookieStore.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="27" column="59" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CookieSessions.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="77" column="105" lean-forward="true" selection-start-line="77" selection-start-column="105" selection-end-line="77" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C9CF421-6377-47C5-BF2C-FCDC7E2498E2/f5/b0c7d2c4/Request.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="109" column="17" selection-start-line="109" selection-start-column="17" selection-end-line="109" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Red.CookieSessions/CookieSessionExtensions.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+          <folding>
+            <marker date="1547022658569" expanded="true" signature="59:1211" ph="{...}" />
+            <marker date="1547022658569" expanded="true" signature="109:1209" ph="{...}" />
+            <marker date="1547022658569" expanded="true" signature="124:323" ph="///     Opens a new session and adds cookie for authentication.  ... " />
+            <marker date="1547022658569" expanded="true" signature="434:789" ph="{...}" />
+            <marker date="1547022658569" expanded="true" signature="798:1013" ph="///     Gets the session-object attached to the request, added by the CookieSessions middleware ... " />
+            <marker date="1547022658569" expanded="true" signature="1114:1203" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/Program.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="37" column="12" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="12" />
+          <folding>
+            <marker date="1547023779268" expanded="true" signature="6:115" ph="..." />
+            <marker date="1547023779268" expanded="true" signature="131:2184" ph="{...}" />
+            <marker date="1547023779268" expanded="true" signature="151:2182" ph="{...}" />
+            <marker date="1547023779268" expanded="true" signature="178:234" ph="{...}" />
+            <marker date="1547023779268" expanded="true" signature="288:2176" ph="{...}" />
+            <marker date="1547023779268" expanded="true" signature="559:605" ph="{...}" />
+            <marker date="1547023779268" expanded="true" signature="699:888" ph="{...}" />
+            <marker date="1547023779268" expanded="true" signature="767:874" ph="{...}" />
+            <marker date="1547023779268" expanded="true" signature="1006:1280" ph="{...}" />
+            <marker date="1547023779268" expanded="true" signature="1336:1597" ph="{...}" />
+            <marker date="1547023779268" expanded="true" signature="1654:1920" ph="{...}" />
+            <marker date="1547023779268" expanded="true" signature="1983:2127" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RedHttpServer.CSharp/src/RedHttpServer/Request.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Red.CookieSessions/CookieSession.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <marker date="1546974665241" expanded="false" signature="6:43" ph="..." />
+            <marker date="1546974665241" expanded="true" signature="73:1568" ph="{...}" />
+            <marker date="1546974665241" expanded="true" signature="123:1566" ph="{...}" />
+            <marker date="1546974665241" expanded="true" signature="205:287" ph="{...}" />
+            <marker date="1546974665241" expanded="true" signature="297:346" ph="///  ... " />
+            <marker date="1546974665241" expanded="true" signature="456:604" ph="///    Renews the session expiry time and updates the cookie ... " />
+            <marker date="1546974665241" expanded="true" signature="653:1033" ph="{...}" />
+            <marker date="1546974665241" expanded="true" signature="1043:1179" ph="///    Closes the session and updates the cookie ... " />
+            <marker date="1546974665241" expanded="true" signature="1228:1560" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Red.CookieSessions/CookieSessions.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="116" column="9" selection-start-line="116" selection-start-column="9" selection-end-line="116" selection-end-column="9" />
+          <folding>
+            <marker date="1547022988745" expanded="true" signature="6:202" ph="..." />
+            <marker date="1547022988745" expanded="true" signature="232:5584" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="239:316" ph="///     RedMiddleware for CookieSessions ... " />
+            <marker date="1547022988745" expanded="true" signature="406:5582" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="534:682" ph="/// Constructor for CookieSession Middleware ... " />
+            <marker date="1547022988745" expanded="true" signature="744:1455" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="1816:1925" ph="///     Do not invoke. Is invoked by the server when it starts.  ... " />
+            <marker date="1547022988745" expanded="true" signature="1978:2041" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="2051:2172" ph="///     Do not invoke. Is invoked by the server with every websocket request ... " />
+            <marker date="1547022988745" expanded="true" signature="2285:2396" ph="///     Do not invoke. Is invoked by the server with every request ... " />
+            <marker date="1547022988745" expanded="true" signature="2551:2727" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="2586:2717" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="2737:3049" ph="/// Authenticates a request and sets the sessionData if valid, and responds with 401 when invalid ... " />
+            <marker date="1547022988745" expanded="true" signature="3115:3688" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="3212:3264" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="3370:3483" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="3560:3630" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="3795:4126" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="3919:4031" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="4166:4579" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="4656:4935" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="4999:5392" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="5086:5141" ph="{...}" />
+            <marker date="1547022988745" expanded="true" signature="5467:5567" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Red.CookieSessions/InMemoryCookieStore.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
+          <folding>
+            <marker date="1545003683106" expanded="false" signature="6:99" ph="..." />
+            <marker date="1545003683106" expanded="true" signature="129:1264" ph="{...}" />
+            <marker date="1545003683106" expanded="true" signature="215:1262" ph="{...}" />
+            <marker date="1545003683106" expanded="true" signature="441:711" ph="{...}" />
+            <marker date="1545003683106" expanded="true" signature="616:701" ph="{...}" />
+            <marker date="1545003683106" expanded="true" signature="795:855" ph="{...}" />
+            <marker date="1545003683106" expanded="true" signature="947:1125" ph="{...}" />
+            <marker date="1545003683106" expanded="true" signature="1182:1256" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Red.CookieSessions/ICookieStore.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="18" column="75" lean-forward="true" selection-start-line="18" selection-start-column="75" selection-end-line="18" selection-end-column="75" />
+          <folding>
+            <marker date="1547023967816" expanded="false" signature="6:43" ph="..." />
+            <marker date="1547023967816" expanded="true" signature="73:1287" ph="{...}" />
+            <marker date="1547023967816" expanded="true" signature="125:1285" ph="{...}" />
+            <marker date="1547023967816" expanded="true" signature="140:430" ph="/// For attempting to get the session for the given token ... " />
+            <marker date="1547023967816" expanded="true" signature="527:785" ph="/// For attempting to remove a session from the session store ... " />
+            <marker date="1547023967816" expanded="true" signature="847:1074" ph="/// Insert, or update, the session for a given token ... " />
+            <marker date="1547023967816" expanded="true" signature="1163:1249" ph="/// Remove all sessions that have expired ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
