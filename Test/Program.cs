@@ -35,24 +35,15 @@ namespace Test
                 }
             }
 
-            // URL param demo
-            server.Get("/:param1/:paramtwo/:somethingthird", Auth, async (req, res) =>
+            server.Get("/", Auth, async (req, res) =>
             {
                 var session = req.GetSession<MySess>();
-                await res.SendString(
-                    $"Hi {session.Data.Username} URL: {req.Parameters["param1"]} / {req.Parameters["paramtwo"]} / {req.Parameters["somethingthird"]}");
+                await res.SendString($"Hi {session.Data.Username}");
             });
 
             server.Get("/login", async (req, res) =>
             {
                 // To make it easy to test the session system only using the browser and no credentials
-                await req.OpenSession(new MySess {Username = "benny"});
-                await res.SendStatus(HttpStatusCode.OK);
-            });
-
-            server.Post("/login", async (req, res) =>
-            {
-                // Here we could authenticate the user properly, with credentials sent in a form, or similar
                 await req.OpenSession(new MySess {Username = "benny"});
                 await res.SendStatus(HttpStatusCode.OK);
             });
