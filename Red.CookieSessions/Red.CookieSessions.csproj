@@ -12,7 +12,7 @@
     <PackageIconUrl>https://rosenbjerg.dk/red/logo.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/rosenbjerg/Red.CookieSessions</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageTags>red redhttpserver cookiesession session rhttpserver</PackageTags>
+    <PackageTags>red redhttp redhttpserver cookiesession session rhttp rhttpserver</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>API changes</PackageReleaseNotes>
     <LangVersion>7.3</LangVersion>

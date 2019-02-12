@@ -36,10 +36,8 @@ namespace Red.CookieSessions
         public static async Task Renew<TCookieSession>(this TCookieSession session, Request request)  where TCookieSession : class, ICookieSession, new()
         {
             var manager = request.ServerPlugins.Get<CookieSessions<TCookieSession>>();
-            var existingCookie = request.Cookies[manager.TokenName];
-            var newCookie = await manager.RenewSession(existingCookie, session);
-            if (newCookie != "")
-                request.UnderlyingRequest.HttpContext.Response.Headers["Set-Cookie"] = newCookie;
+            var newCookie = await manager.RenewSession(session);
+            request.UnderlyingRequest.HttpContext.Response.Headers["Set-Cookie"] = newCookie;
         }
 
         /// <summary>
@@ -50,7 +48,7 @@ namespace Red.CookieSessions
         public static async Task Close<TCookieSession>(this TCookieSession session, Request request)  where TCookieSession : class, ICookieSession, new()
         {
             var manager = request.ServerPlugins.Get<CookieSessions<TCookieSession>>();
-            var closed = await manager.CloseSession(request.Cookies[manager.TokenName], out var cookie);
+            var closed = await manager.CloseSession(session, out var cookie);
             if (closed)
                 request.UnderlyingRequest.HttpContext.Response.Headers["Set-Cookie"] = cookie;
         }

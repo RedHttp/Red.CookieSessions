@@ -130,7 +130,6 @@ namespace Red.CookieSessions
             }
             
             req.SetData(session);
-
         }
 
         private async Task<Tuple<bool, TCookieSession>> TryAuthenticateToken(string token)
@@ -158,23 +157,23 @@ namespace Red.CookieSessions
 
         internal async Task<string> OpenSession(TCookieSession session) 
         {
-            var id = GenerateToken();
+            session.SessionId = GenerateToken();
             session.Expires = DateTime.UtcNow.Add(SessionLength);
-            await Store.Set(id, session);
-            return $"{TokenName}={id};{GenerateCookie()} Expires={session.Expires:R}";
+            await Store.Set(session);
+            return $"{TokenName}={session.SessionId}; {GenerateCookie()} Expires={session.Expires:R}";
         }
 
-        internal async Task<string> RenewSession(string token, TCookieSession session)
+        internal async Task<string> RenewSession(TCookieSession session)
         {
             session.Expires = DateTime.UtcNow.Add(SessionLength);
-            await Store.Set(token, session);
-            return $"{TokenName}={token};{GenerateCookie()} Expires={session.Expires:R}";
+            await Store.Set(session);
+            return $"{TokenName}={session.SessionId}; {GenerateCookie()} Expires={session.Expires:R}";
         }
 
-        internal Task<bool> CloseSession(string token, out string cookie)
+        internal Task<bool> CloseSession(TCookieSession session, out string cookie)
         {
             cookie = _expiredCookie;
-            return Store.TryRemove(token);
+            return Store.TryRemove(session.SessionId);
         }
         
     }

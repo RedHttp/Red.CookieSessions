@@ -7,8 +7,7 @@ namespace Red.CookieSessions
 {
     public class InMemoryCookieStore<TCookieSession> : ICookieStore<TCookieSession> where TCookieSession : class, ICookieSession, new()
     {
-        private readonly ConcurrentDictionary<string, TCookieSession> _sessions =
-            new ConcurrentDictionary<string, TCookieSession>();
+        private readonly ConcurrentDictionary<string, TCookieSession> _sessions = new ConcurrentDictionary<string, TCookieSession>();
 
         public async Task RemoveExpired()
         {
@@ -20,20 +19,20 @@ namespace Red.CookieSessions
             }
         }
 
-        public async Task Set(string token, TCookieSession session)
+        public async Task Set(TCookieSession session)
         {
-            _sessions[token] = session;
+            _sessions[session.SessionId] = session;
         }
 
-        public async Task<Tuple<bool, TCookieSession>> TryGet(string token)
+        public async Task<Tuple<bool, TCookieSession>> TryGet(string id)
         {
-            var success = _sessions.TryGetValue(token, out var session);
+            var success = _sessions.TryGetValue(id, out var session);
             return new Tuple<bool, TCookieSession>(success, session);
         }
 
-        public async Task<bool> TryRemove(string token)
+        public async Task<bool> TryRemove(string sessionId)
         {
-            return _sessions.TryRemove(token, out _);
+            return _sessions.TryRemove(sessionId, out _);
         }
     }
 }
