@@ -10,7 +10,7 @@ namespace Red.CookieSessions
         /// </summary>
         /// <param name="token">The token from the cookie</param>
         /// <returns>Tuple containing bool indicating if session was found, and the session (null if not found)</returns>
-        Task<Tuple<bool, CookieSession<TCookieSession>>> TryGet(string token);
+        Task<Tuple<bool, TCookieSession>> TryGet(string token);
         
         /// <summary>
         /// For attempting to remove a session from the session store
@@ -24,7 +24,7 @@ namespace Red.CookieSessions
         /// </summary>
         /// <param name="token">Token to set the session for</param>
         /// <param name="session">The session object</param>
-        Task Set(string token, CookieSession<TCookieSession> session);
+        Task Set(string token, TCookieSession session);
         
         /// <summary>
         /// Remove all sessions that have expired

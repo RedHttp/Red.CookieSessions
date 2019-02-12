@@ -11,7 +11,7 @@ After installing and referencing this library, the `Red.Request` has the extensi
 
 ### Example
 ```csharp
-class MySess
+class MySess : CookieSessionBase
 {
     public string Username;
 }
@@ -19,10 +19,10 @@ class MySess
 
 var server = new RedHttpServer(5000, "public");
 
-var sessions = new CookieSessions<MySess>(new CookieSessionSettings(TimeSpan.FromDays(5))
+var sessions = new CookieSessions<MySess>(TimeSpan.FromDays(5))
 {
-	Secure = false
-});
+    Secure = false
+};
 
 server.Use(sessions);
 
@@ -35,32 +35,24 @@ async Task Auth(Request req, Response res)
 	}
 }
 
-// URL param demo
-server.Get("/:param1/:paramtwo/:somethingthird", Auth, async (req, res) =>
+server.Get("/", Auth, async (req, res) =>
 {
-	var session = req.GetSession<MySess>();
-	await res.SendString(
-		$"Hi {session.Data.Username} URL: {req.Parameters["param1"]} / {req.Parameters["paramtwo"]} / {req.Parameters["somethingthird"]}");
+    var session = req.GetSession<MySess>();
+    await res.SendString($"Hi {session.Username}");
 });
 
 server.Get("/login", async (req, res) =>
 {
-	// To make it easy to test the session system only using the browser and no credentials
-	await req.OpenSession(new MySess {Username = "benny"});
-	await res.SendStatus(HttpStatusCode.OK);
-});
-
-server.Post("/login", async (req, res) =>
-{
-	// Here we could authenticate the user properly, with credentials sent in a form, or similar
-	await req.OpenSession(new MySess {Username = "benny"});
-	await res.SendStatus(HttpStatusCode.OK);
+    // To make it easy to test the session system only using the browser and no credentials
+    // Would most likely be a POST-request in the real world
+    await req.OpenSession(new MySess {Username = "benny"});
+    await res.SendStatus(HttpStatusCode.OK);
 });
 
 server.Get("/logout", Auth, async (req, res) =>
 {
-	await req.GetSession<MySess>().Close(req);
-	await res.SendStatus(HttpStatusCode.OK);
+    await req.GetSession<MySess>().Close(req);
+    await res.SendStatus(HttpStatusCode.OK);
 });
 await server.RunAsync();
 ```

@@ -9,7 +9,7 @@ namespace Test
 {
     class Program
     {
-        class MySess
+        class MySess : CookieSessionBase
         {
             public string Username;
         }
@@ -19,10 +19,10 @@ namespace Test
             // We serve static files, such as index.html from the 'public' directory
             var server = new RedHttpServer(5000, "public");
 
-            var sessions = new CookieSessions<MySess>(new CookieSessionSettings(TimeSpan.FromDays(5))
+            var sessions = new CookieSessions<MySess>(TimeSpan.FromDays(5))
             {
                 Secure = false
-            });
+            };
 
             server.Use(sessions);
 
@@ -38,7 +38,7 @@ namespace Test
             server.Get("/", Auth, async (req, res) =>
             {
                 var session = req.GetSession<MySess>();
-                await res.SendString($"Hi {session.Data.Username}");
+                await res.SendString($"Hi {session.Username}");
             });
 
             server.Get("/login", async (req, res) =>

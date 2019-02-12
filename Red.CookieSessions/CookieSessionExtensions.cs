@@ -9,7 +9,7 @@ namespace Red.CookieSessions
         /// </summary>
         /// <param name="request"></param>
         /// <param name="sessionData"></param>
-        public static async Task OpenSession<TCookieSession>(this Request request, TCookieSession sessionData)
+        public static async Task OpenSession<TCookieSession>(this Request request, TCookieSession sessionData) where TCookieSession : class, ICookieSession, new()
         {
             var existing = request.GetSession<TCookieSession>();
             existing?.Close(request);
@@ -23,9 +23,36 @@ namespace Red.CookieSessions
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public static CookieSession<TCookieSession> GetSession<TCookieSession>(this Request request)
+        public static TCookieSession GetSession<TCookieSession>(this Request request)
         {
-            return request.GetData<CookieSession<TCookieSession>>();
+            return request.GetData<TCookieSession>();
+        }
+
+        /// <summary>
+        ///    Renews the session expiry time and updates the cookie
+        /// </summary>
+        /// <param name="session"></param>
+        /// <param name="request"></param>
+        public static async Task Renew<TCookieSession>(this TCookieSession session, Request request)  where TCookieSession : class, ICookieSession, new()
+        {
+            var manager = request.ServerPlugins.Get<CookieSessions<TCookieSession>>();
+            var existingCookie = request.Cookies[manager.TokenName];
+            var newCookie = await manager.RenewSession(existingCookie, session);
+            if (newCookie != "")
+                request.UnderlyingRequest.HttpContext.Response.Headers["Set-Cookie"] = newCookie;
+        }
+
+        /// <summary>
+        ///    Closes the session and updates the cookie
+        /// </summary>
+        /// <param name="session"></param>
+        /// <param name="request"></param>
+        public static async Task Close<TCookieSession>(this TCookieSession session, Request request)  where TCookieSession : class, ICookieSession, new()
+        {
+            var manager = request.ServerPlugins.Get<CookieSessions<TCookieSession>>();
+            var closed = await manager.CloseSession(request.Cookies[manager.TokenName], out var cookie);
+            if (closed)
+                request.UnderlyingRequest.HttpContext.Response.Headers["Set-Cookie"] = cookie;
         }
     }
 }
