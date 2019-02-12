@@ -14,7 +14,7 @@
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>red redhttpserver cookiesession session rhttpserver</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Refactored API</PackageReleaseNotes>
+    <PackageReleaseNotes>API changes</PackageReleaseNotes>
     <LangVersion>7.3</LangVersion>
     <PackageVersion>3.0.0</PackageVersion>
     <Title>Red.CookieSessions</Title>
