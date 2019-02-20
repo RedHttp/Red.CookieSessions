@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Red;
 using Red.CookieSessions;
 
-namespace Test
+namespace Example
 {
     class Program
     {
