@@ -16,7 +16,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>API changes</PackageReleaseNotes>
     <LangVersion>7.3</LangVersion>
-    <PackageVersion>3.0.0</PackageVersion>
+    <PackageVersion>3.0.1</PackageVersion>
     <Title>Red.CookieSessions</Title>
   </PropertyGroup>
   <ItemGroup>
