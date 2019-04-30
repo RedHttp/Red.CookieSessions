@@ -10,7 +10,7 @@ namespace Red.CookieSessions
         /// </summary>
         /// <param name="id">The session id from the cookie</param>
         /// <returns>Tuple containing bool indicating if session was found, and the session (null if not found)</returns>
-        Task<Tuple<bool, TCookieSession>> TryGet(string id);
+        Task<(bool, TCookieSession)> TryGet(string id);
         
         /// <summary>
         /// For attempting to remove a session from the session store

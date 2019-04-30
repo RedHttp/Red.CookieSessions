@@ -13,12 +13,14 @@ namespace Example
     }
     class Program
     {
-        private static async Task Auth(Request req, Response res)
+        private static async Task<HandlerType> Auth(Request req, Response res)
         {
             if (req.GetSession<MySession>() == null)
             {
                 await res.SendStatus(HttpStatusCode.Unauthorized);
+                return HandlerType.Final;
             }
+            return HandlerType.Continue;
         }
         public static async Task Main(string[] args)
         {
@@ -30,25 +32,23 @@ namespace Example
                 Secure = false
             });
 
-
-
-            server.Get("/", Auth, async (req, res) =>
+            server.Get("/", Auth, (req, res) =>
             {
                 var session = req.GetSession<MySession>();
-                await res.SendString($"Hi {session.Username}");
+                return res.SendString($"Hi {session.Username}");
             });
 
             server.Get("/login", async (req, res) =>
             {
                 // To make it easy to test the session system only using the browser and no credentials
                 await req.OpenSession(new MySession {Username = "benny"});
-                await res.SendStatus(HttpStatusCode.OK);
+                return await res.SendStatus(HttpStatusCode.OK);
             });
 
             server.Get("/logout", Auth, async (req, res) =>
             {
                 await req.GetSession<MySession>().Close(req);
-                await res.SendStatus(HttpStatusCode.OK);
+                return await res.SendStatus(HttpStatusCode.OK);
             });
             await server.RunAsync();
         }

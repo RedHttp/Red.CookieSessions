@@ -14,9 +14,10 @@ namespace Red.CookieSessions
             var existing = request.GetSession<TCookieSession>();
             existing?.Close(request);
 
-            var manager = request.ServerPlugins.Get<CookieSessions<TCookieSession>>();
+            var context = request.Context;
+            var manager = request.Context.Plugins.Get<CookieSessions<TCookieSession>>();
             var cookie = await manager.OpenSession(sessionData);
-            request.UnderlyingContext.Response.Headers["Set-Cookie"] = cookie;
+            context.Response.AspNetResponse.Headers["Set-Cookie"] = cookie;
         }
         /// <summary>
         ///     Gets the session-object attached to the request, added by the CookieSessions middleware
@@ -35,9 +36,10 @@ namespace Red.CookieSessions
         /// <param name="request"></param>
         public static async Task Renew<TCookieSession>(this TCookieSession session, Request request)  where TCookieSession : class, ICookieSession, new()
         {
-            var manager = request.ServerPlugins.Get<CookieSessions<TCookieSession>>();
+            var context = request.Context;
+            var manager = context.Plugins.Get<CookieSessions<TCookieSession>>();
             var newCookie = await manager.RenewSession(session);
-            request.UnderlyingRequest.HttpContext.Response.Headers["Set-Cookie"] = newCookie;
+            context.Response.AspNetResponse.Headers["Set-Cookie"] = newCookie;
         }
 
         /// <summary>
@@ -47,10 +49,13 @@ namespace Red.CookieSessions
         /// <param name="request"></param>
         public static async Task Close<TCookieSession>(this TCookieSession session, Request request)  where TCookieSession : class, ICookieSession, new()
         {
-            var manager = request.ServerPlugins.Get<CookieSessions<TCookieSession>>();
+            var context = request.Context;
+            var manager = context.Plugins.Get<CookieSessions<TCookieSession>>();
             var closed = await manager.CloseSession(session, out var cookie);
             if (closed)
-                request.UnderlyingRequest.HttpContext.Response.Headers["Set-Cookie"] = cookie;
+            {
+                context.Response.AspNetResponse.Headers["Set-Cookie"] = cookie;
+            }
         }
     }
 }

@@ -79,18 +79,18 @@ namespace Red.CookieSessions
         /// </summary>
         public void Initialize(RedHttpServer server)
         {
-            server.Plugins.Register(this);
+            server.Plugins.Register<CookieSessions<TCookieSession>, CookieSessions<TCookieSession>>(this);
         }
 
         /// <summary>
         ///     Do not invoke. Is invoked by the server with every websocket request
         /// </summary>
-        public Task Process(Request req, WebSocketDialog wsd, Response res) => Authenticate(req, res);
+        public Task<HandlerType> Invoke(Request req, WebSocketDialog wsd, Response res) => Authenticate(req, res);
 
         /// <summary>
         ///     Do not invoke. Is invoked by the server with every request
         /// </summary>
-        public Task Process(Request req, Response res) => Authenticate(req, res);
+        public Task<HandlerType> Invoke(Request req, Response res) => Authenticate(req, res);
 
         // Simple maintainer loop
         private async void ReapLoop()
@@ -108,18 +108,18 @@ namespace Red.CookieSessions
         /// <param name="req">The given request</param>
         /// <param name="res">The response for the request</param>
         /// <returns>True when valid</returns>
-        public async Task Authenticate(Request req, Response res)
+        public async Task<HandlerType> Authenticate(Request req, Response res)
         {
             if (!req.Cookies.ContainsKey(TokenName) || req.Cookies[TokenName] == "")
             {
-                return;
+                return HandlerType.Continue;
             }
 
             var auth = await TryAuthenticateToken(req.Cookies[TokenName]);
             if (!auth.Item1)
             {
                 res.AddHeader("Set-Cookie", _expiredCookie);
-                return;
+                return HandlerType.Continue;
             }
 
             var session = auth.Item2;
@@ -130,17 +130,17 @@ namespace Red.CookieSessions
             }
             
             req.SetData(session);
+            return HandlerType.Continue;
         }
 
-        private async Task<Tuple<bool, TCookieSession>> TryAuthenticateToken(string token)
+        private async Task<(bool sucess, TCookieSession found)> TryAuthenticateToken(string token)
         {
-            var got = await Store.TryGet(token);
-            if (!got.Item1 || got.Item2.Expires <= DateTime.Now)
+            var (success, found) = await Store.TryGet(token);
+            if (!success || found.Expires <= DateTime.Now)
             {
-                return new Tuple<bool, TCookieSession>(false, null);
+                return (false, null);
             }
-
-            return new Tuple<bool, TCookieSession>(true, got.Item2);
+            return (true, found);
         }
 
         private string GenerateToken()
