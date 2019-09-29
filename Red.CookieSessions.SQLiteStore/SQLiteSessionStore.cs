@@ -15,10 +15,10 @@ namespace Red.CookieSessions.SQLiteStore
         }
 
 
-        public async Task<Tuple<bool, T>> TryGet(string id)
+        public async Task<ValueTuple<bool, T>> TryGet(string id)
         {
             var result = await _db.GetAsync<T>(id);
-            return new Tuple<bool, T>(result != null, result);
+            return (result != null, result);
         }
 
         public async Task<bool> TryRemove(string sessionId)
@@ -34,7 +34,7 @@ namespace Red.CookieSessions.SQLiteStore
         public async Task RemoveExpired()
         {
             var now = DateTime.UtcNow;
-            await _db.Table<T>().DeleteAsync(s => s.Expires <= now);
+            await _db.Table<T>().DeleteAsync(s => s.Expiration <= now);
         }
     }
 }

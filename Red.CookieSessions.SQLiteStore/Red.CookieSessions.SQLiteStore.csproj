@@ -1,24 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Red.CookieSessions.SQLiteStore</Title>
         <Authors>Malte Rosenbjerg</Authors>
         <Description>A SQLite session store for Red.CookieSessions, to persists sessions</Description>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Copyright>Copyright © Rosenbjerg 2019</Copyright>
-        <PackageProjectUrl>https://github.com/rosenbjerg/Red.CookieSessions</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/rosenbjerg/Red.CookieSessions/blob/master/LICENSE.md</PackageLicenseUrl>
-        <PackageIconUrl>https://rosenbjerg.dk/red/logo.png</PackageIconUrl>
-        <RepositoryUrl>https://github.com/rosenbjerg/Red.CookieSessions</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/RedHttp/Red.CookieSessions</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/RedHttp/Red.CookieSessions/blob/master/LICENSE.md</PackageLicenseUrl>
+        <PackageIconUrl>https://redhttp.github.io/Red/assets/red-large.png</PackageIconUrl>
+        <RepositoryUrl>https://github.com/RedHttp/Red.CookieSessions</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>red redhttp redhttpserver cookiesession session rhttp rhttpserver sqlite session store</PackageTags>
-        <PackageReleaseNotes>First release</PackageReleaseNotes>
+        <PackageReleaseNotes>Updated Red.CookieSessions dependency</PackageReleaseNotes>
+        <PackageVersion>1.1.0</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Red.CookieSessions" Version="3.0.1" />
-      <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+      <PackageReference Include="Red.CookieSessions" Version="4.0.1" />
+      <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     </ItemGroup>
 
 </Project>
