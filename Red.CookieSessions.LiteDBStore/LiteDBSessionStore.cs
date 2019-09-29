@@ -15,10 +15,10 @@ namespace Red.CookieSessions.LiteDBStore
         }
 
 
-        public async Task<Tuple<bool, T>> TryGet(string id)
+        public async Task<ValueTuple<bool, T>> TryGet(string id)
         {
             var result = _db.FindById(id);
-            return new Tuple<bool, T>(result != null, result);
+            return (result != null, result);
         }
 
         public async Task<bool> TryRemove(string sessionId)
@@ -34,7 +34,7 @@ namespace Red.CookieSessions.LiteDBStore
         public async Task RemoveExpired()
         {
             var now = DateTime.UtcNow;
-            _db.Delete(s => s.Expires <= now);
+            _db.Delete(s => s.Expiration <= now);
         }
     }
 }
