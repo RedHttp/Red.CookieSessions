@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red.CookieSessions.SQLiteSt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red.CookieSessions.LiteDBStore", "Red.CookieSessions.LiteDBStore\Red.CookieSessions.LiteDBStore.csproj", "{B5674D2E-1BDD-4DA6-9F60-9FCEDF894F00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red.CookieSessions.RedisStore", "Red.CookieSessions.RedisStore\Red.CookieSessions.RedisStore.csproj", "{47425E9B-3539-4C3A-9B3B-DEFE6C5B9EC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red.CookieSessions.EFCore", "Red.CookieSessions.EFCore\Red.CookieSessions.EFCore.csproj", "{5CF22CCE-3157-4133-B762-EDBAE4F30413}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{B5674D2E-1BDD-4DA6-9F60-9FCEDF894F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5674D2E-1BDD-4DA6-9F60-9FCEDF894F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5674D2E-1BDD-4DA6-9F60-9FCEDF894F00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47425E9B-3539-4C3A-9B3B-DEFE6C5B9EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47425E9B-3539-4C3A-9B3B-DEFE6C5B9EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47425E9B-3539-4C3A-9B3B-DEFE6C5B9EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47425E9B-3539-4C3A-9B3B-DEFE6C5B9EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CF22CCE-3157-4133-B762-EDBAE4F30413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF22CCE-3157-4133-B762-EDBAE4F30413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CF22CCE-3157-4133-B762-EDBAE4F30413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CF22CCE-3157-4133-B762-EDBAE4F30413}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
