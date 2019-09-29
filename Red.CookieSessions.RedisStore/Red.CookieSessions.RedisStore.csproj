@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Red.CookieSessions.RedisStore</Title>
+		<Authors>Malte Rosenbjerg</Authors>
+        <Description>A Redis session store for Red.CookieSessions</Description>
+        <Copyright>Copyright © Rosenbjerg 2019</Copyright>
+        <PackageProjectUrl>https://github.com/RedHttp/Red.CookieSessions</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/RedHttp/Red.CookieSessions/blob/master/LICENSE.md</PackageLicenseUrl>
+        <PackageIconUrl>https://redhttp.github.io/Red/assets/red-large.png</PackageIconUrl>
+        <RepositoryUrl>https://github.com/RedHttp/Red.CookieSessions</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <PackageTags>red redhttp redhttpserver cookiesession session rhttp rhttpserver sqlite session store</PackageTags>
+        <PackageReleaseNotes>Initial version</PackageReleaseNotes>
+        <PackageVersion>1.1.0</PackageVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Red.CookieSessions" Version="3.1.0" />
+      <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+      <PackageReference Include="StackExchange.Redis.Extensions.Core" Version="5.2.0" />
+      <PackageReference Include="StackExchange.Redis.Extensions.Newtonsoft" Version="5.2.0" />
+    </ItemGroup>
+
+</Project>
