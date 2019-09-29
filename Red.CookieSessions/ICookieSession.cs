@@ -4,7 +4,7 @@ namespace Red.CookieSessions
 {
     public interface ICookieSession
     {
-        DateTime Expires { get; set; }
-        string SessionId { get; set; }
+        DateTime Expiration { get; set; }
+        string Id { get; set; }
     }
 }

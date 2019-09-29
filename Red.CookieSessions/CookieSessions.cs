@@ -13,7 +13,8 @@ namespace Red.CookieSessions
     /// <summary>
     ///     RedMiddleware for CookieSessions
     /// </summary>
-    public class CookieSessions<TCookieSession> : IRedMiddleware, IRedWebSocketMiddleware where TCookieSession : class, ICookieSession, new()
+    public class CookieSessions<TCookieSession> : IRedMiddleware, IRedWebSocketMiddleware 
+        where TCookieSession : class, ICookieSession, new()
     {
         /// <summary>
         /// The storage for the sessions
@@ -110,23 +111,21 @@ namespace Red.CookieSessions
         /// <returns>True when valid</returns>
         public async Task<HandlerType> Authenticate(Request req, Response res)
         {
-            if (!req.Cookies.ContainsKey(TokenName) || req.Cookies[TokenName] == "")
+            if (!req.Cookies.TryGetValue(TokenName, out var token) || token == "")
             {
                 return HandlerType.Continue;
             }
 
-            var auth = await TryAuthenticateToken(req.Cookies[TokenName]);
-            if (!auth.Item1)
+            var (sucess, session) = await TryAuthenticateToken(req.Cookies[TokenName]);
+            if (!sucess)
             {
-                res.AddHeader("Set-Cookie", _expiredCookie);
+                res.AspNetResponse.Headers["Set-Cookie"] = _expiredCookie;
                 return HandlerType.Continue;
             }
-
-            var session = auth.Item2;
 
             if (AutoRenew)
             {
-                await session.Renew(req);
+                await res.RenewSession(session);
             }
             
             req.SetData(session);
@@ -136,7 +135,7 @@ namespace Red.CookieSessions
         private async Task<(bool sucess, TCookieSession found)> TryAuthenticateToken(string token)
         {
             var (success, found) = await Store.TryGet(token);
-            if (!success || found.Expires <= DateTime.Now)
+            if (!success || found.Expiration <= DateTime.Now)
             {
                 return (false, null);
             }
@@ -157,23 +156,23 @@ namespace Red.CookieSessions
 
         internal async Task<string> OpenSession(TCookieSession session) 
         {
-            session.SessionId = GenerateToken();
-            session.Expires = DateTime.UtcNow.Add(SessionLength);
+            session.Id = GenerateToken();
+            session.Expiration = DateTime.UtcNow.Add(SessionLength);
             await Store.Set(session);
-            return $"{TokenName}={session.SessionId}; {GenerateCookie()} Expires={session.Expires:R}";
+            return $"{TokenName}={session.Id}; {GenerateCookie()} Expires={session.Expiration:R}";
         }
 
         internal async Task<string> RenewSession(TCookieSession session)
         {
-            session.Expires = DateTime.UtcNow.Add(SessionLength);
+            session.Expiration = DateTime.UtcNow.Add(SessionLength);
             await Store.Set(session);
-            return $"{TokenName}={session.SessionId}; {GenerateCookie()} Expires={session.Expires:R}";
+            return $"{TokenName}={session.Id}; {GenerateCookie()} Expires={session.Expiration:R}";
         }
 
         internal Task<bool> CloseSession(TCookieSession session, out string cookie)
         {
             cookie = _expiredCookie;
-            return Store.TryRemove(session.SessionId);
+            return Store.TryRemove(session.Id);
         }
         
     }

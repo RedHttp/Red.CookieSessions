@@ -14,12 +14,12 @@
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>red redhttp redhttpserver cookiesession session rhttp rhttpserver</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Updated Red dependency to v4</PackageReleaseNotes>
+    <PackageReleaseNotes>API Change: extension methods moved to Response</PackageReleaseNotes>
     <LangVersion>7.3</LangVersion>
-    <PackageVersion>3.0.2</PackageVersion>
+    <PackageVersion>4.0.1</PackageVersion>
     <Title>Red.CookieSessions</Title>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="RHttpServer" Version="4.0.0" />
+    <PackageReference Include="RHttpServer" Version="4.0.2" />
   </ItemGroup>
 </Project>

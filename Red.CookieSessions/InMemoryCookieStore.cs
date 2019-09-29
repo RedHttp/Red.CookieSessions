@@ -12,7 +12,7 @@ namespace Red.CookieSessions
         public async Task RemoveExpired()
         {
             var now = DateTime.Now;
-            var expired = _sessions.Where(kvp => kvp.Value.Expires < now).ToList();
+            var expired = _sessions.Where(kvp => kvp.Value.Expiration < now).ToList();
             foreach (var session in expired)
             {
                 _sessions.TryRemove(session.Key, out _);
@@ -21,7 +21,7 @@ namespace Red.CookieSessions
 
         public async Task Set(TCookieSession session)
         {
-            _sessions[session.SessionId] = session;
+            _sessions[session.Id] = session;
         }
 
         public async Task<(bool, TCookieSession)> TryGet(string id)
