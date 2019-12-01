@@ -1,17 +1,22 @@
 # Cookie Sessions for RedHttpServer
-Simple session management middleware for Red. 
+### Simple session management middleware for Red. 
+[![GitHub](https://img.shields.io/github/license/redhttp/red.cookiesessions)](https://github.com/RedHttp/Red.CookieSessions/blob/master/LICENSE.md)
+[![Nuget](https://img.shields.io/nuget/v/red.cookiesessions)](https://www.nuget.org/packages/red.cookiesessions/)
+[![Nuget](https://img.shields.io/nuget/dt/red.cookiesessions)](https://www.nuget.org/packages/red.cookiesessions/)
+![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/nuget/red.cookiesessions)
+
+### SessionStores already available:
+- Entity Framework Core
+- Redis
+- LiteDB
+- SQLite
 
 ### Usage
-After installing and referencing this library, the `Red.Request` has the extension methods `OpenSession(sessionData)` and `GetSession()`.
-
-`OpenSession(sessionData)` will open a new session and add a header to the response associated with the request.
-
-`GetSession<TSession>()` will return the `CookieSession` object wrapping the `TSession`-data, which has two methods: `Renew()` and `Close()`, and the field `Data`, which holds the session-data object
-
+After installing and referencing this library, the `Red.Response` has the extension methods `OpenSession(TSession session)`, `RenewSession(TSession session)` and `CloseSession(TSession session)`
 
 ### Example
 ```csharp
-class MySess : CookieSessionBase
+class MySession : CookieSessionBase
 {
     public string Username;
 }
@@ -19,17 +24,12 @@ class MySess : CookieSessionBase
 
 var server = new RedHttpServer(5000, "public");
 
-var sessions = new CookieSessions<MySess>(TimeSpan.FromDays(5))
-{
-    Secure = false
-};
-
-server.Use(sessions);
+server.Use(new CookieSessions<MySession>(TimeSpan.FromDays(5)));
 
 
 async Task Auth(Request req, Response res)
 {
-	if (req.GetSession<MySess>() == null)
+	if (req.GetSession<MySession>() == null)
 	{
 		await res.SendStatus(HttpStatusCode.Unauthorized);
 	}
@@ -37,7 +37,7 @@ async Task Auth(Request req, Response res)
 
 server.Get("/", Auth, async (req, res) =>
 {
-    var session = req.GetSession<MySess>();
+    var session = req.GetSession<MySession>();
     await res.SendString($"Hi {session.Username}");
 });
 
@@ -45,13 +45,14 @@ server.Get("/login", async (req, res) =>
 {
     // To make it easy to test the session system only using the browser and no credentials
     // Would most likely be a POST-request in the real world
-    await req.OpenSession(new MySess {Username = "benny"});
+    await res.OpenSession(new MySession { Username = "benny" });
     await res.SendStatus(HttpStatusCode.OK);
 });
 
 server.Get("/logout", Auth, async (req, res) =>
 {
-    await req.GetSession<MySess>().Close(req);
+    var session = req.GetData<MySession>();
+    await res.CloseSession(session);
     await res.SendStatus(HttpStatusCode.OK);
 });
 await server.RunAsync();
@@ -62,4 +63,3 @@ await server.RunAsync();
 This header's value contains the token used for authentication. 
 The token is generated using the `RandomNumberGenerator` from `System.Security.Cryptography`, 
 so it shouldn't be too easy to "guess" other tokens, even with knowledge of some tokens.
-
