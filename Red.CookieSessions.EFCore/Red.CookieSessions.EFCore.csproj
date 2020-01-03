@@ -13,8 +13,8 @@
         <RepositoryUrl>https://github.com/rosenbjerg/Red.CookieSessions</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>red redhttp redhttpserver cookiesession session rhttp rhttpserver efcore session store</PackageTags>
-        <PackageReleaseNotes>Initial version</PackageReleaseNotes>
-        <PackageVersion>1.0.0</PackageVersion>
+        <PackageReleaseNotes>Use AsNoTracking to avoid wasting time on creating EF proxy objects</PackageReleaseNotes>
+        <PackageVersion>1.1.0</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>

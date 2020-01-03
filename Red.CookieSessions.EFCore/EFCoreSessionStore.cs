@@ -18,13 +18,13 @@ namespace Red.CookieSessions.EFCore
 
         public async Task<ValueTuple<bool, TSession>> TryGet(string sessionId)
         {
-            var result = await _db.Set<TSession>().FindAsync(sessionId);
+            var result = await _db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == sessionId);
             return (result != null, result);
         }
 
         public async Task<bool> TryRemove(string sessionId)
         {
-            var result = await _db.Set<TSession>().FindAsync(sessionId);
+            var result = await _db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == sessionId);
             if (result == default) return true;
             _db.Set<TSession>().Remove(result);
             await _db.SaveChangesAsync();
@@ -33,7 +33,7 @@ namespace Red.CookieSessions.EFCore
 
         public async Task Set(TSession session)
         {
-            var result = await _db.Set<TSession>().FindAsync(session.Id);
+            var result = await _db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == session.Id);
             if (result != default)
             {
                 _db.Remove(result);
@@ -45,7 +45,7 @@ namespace Red.CookieSessions.EFCore
         public async Task RemoveExpired()
         {
             var now = DateTime.UtcNow;
-            var expired = _db.Set<TSession>().Where(s => s.Expiration <= now).ToArrayAsync();
+            var expired = _db.Set<TSession>().Where(s => s.Expiration <= now);
             _db.RemoveRange(expired);
             await _db.SaveChangesAsync();
         }
