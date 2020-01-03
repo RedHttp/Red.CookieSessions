@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using StackExchange.Redis;
-using StackExchange.Redis.Extensions.Core;
 
 namespace Red.CookieSessions.RedisSessionStore
 {
@@ -9,34 +10,39 @@ namespace Red.CookieSessions.RedisSessionStore
         where T : ICookieSession, new()
     {
         private readonly ConnectionMultiplexer _redisConnection;
-
+        private const string CacheKey = "Red.CookieSession:";
+        
         public RedisSessionStore(ConnectionMultiplexer redisConnection)
         {
             _redisConnection = redisConnection;
         }
-
-
-        public async Task<ValueTuple<bool, T>> TryGet(string id)
+        
+        public async Task<ValueTuple<bool, T>> TryGet(string sessionId)
         {
-            var db = _redisConnection.GetDatabase();
-            var result = await db<T>(id);
-            return (result != null, result);
+            var key = CacheKey + sessionId;
+            var value = await _redisConnection.GetDatabase().StringGetAsync(key);
+            
+            return (value.HasValue, value.HasValue ? JsonSerializer.Deserialize<T>(value) : default);
         }
 
         public async Task<bool> TryRemove(string sessionId)
         {
-            return await _redisConnection.DeleteAsync<T>(sessionId) > 0;
+            var key = CacheKey + sessionId;
+            return await _redisConnection.GetDatabase().KeyDeleteAsync(key);
         }
 
         public Task Set(T session)
         {
-            return _redisConnection.InsertOrReplaceAsync(session);
+            var key = CacheKey + session.SessionId;
+            var json = JsonSerializer.Serialize(session);
+            var expiration = session.Expires.Subtract(DateTime.UtcNow);
+
+            return _redisConnection.GetDatabase().StringSetAsync(key, json, expiration);
         }
 
         public async Task RemoveExpired()
         {
-            var now = DateTime.UtcNow;
-            await _redisConnection.Table<T>().DeleteAsync(s => s.Expires <= now);
+            // redis does this automatically
         }
     }
 }
