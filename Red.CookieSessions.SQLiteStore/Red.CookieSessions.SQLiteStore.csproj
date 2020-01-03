@@ -18,7 +18,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Red.CookieSessions" Version="4.0.1" />
+      <PackageReference Include="Red.CookieSessions" Version="4.1.0" />
       <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     </ItemGroup>
 

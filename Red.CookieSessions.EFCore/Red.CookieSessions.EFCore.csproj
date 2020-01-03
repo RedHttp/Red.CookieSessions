@@ -19,7 +19,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
-      <PackageReference Include="Red.CookieSessions" Version="4.0.1" />
+      <PackageReference Include="Red.CookieSessions" Version="4.1.0" />
     </ItemGroup>
 
 </Project>
