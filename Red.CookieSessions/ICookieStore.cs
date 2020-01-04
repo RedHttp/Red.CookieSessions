@@ -4,13 +4,14 @@ using System.Threading.Tasks;
 namespace Red.CookieSessions
 {
     public interface ICookieStore<TCookieSession>
+        where TCookieSession : class
     {
         /// <summary>
         /// For attempting to get the session for the given token
         /// </summary>
         /// <param name="id">The session id from the cookie</param>
         /// <returns>Tuple containing bool indicating if session was found, and the session (null if not found)</returns>
-        Task<(bool, TCookieSession)> TryGet(string id);
+        Task<TCookieSession?> TryGet(string id);
         
         /// <summary>
         /// For attempting to remove a session from the session store

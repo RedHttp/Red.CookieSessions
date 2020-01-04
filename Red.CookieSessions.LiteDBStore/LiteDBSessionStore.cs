@@ -5,7 +5,7 @@ using LiteDB;
 namespace Red.CookieSessions.LiteDBStore
 {
     public class LiteDBSessionStore<T> : ICookieStore<T>
-        where T : ICookieSession, new()
+        where T : class, ICookieSession, new()
     {
         private readonly LiteCollection<T> _db;
 
@@ -15,10 +15,9 @@ namespace Red.CookieSessions.LiteDBStore
         }
 
 
-        public async Task<ValueTuple<bool, T>> TryGet(string id)
+        public async Task<T?> TryGet(string id)
         {
-            var result = _db.FindById(id);
-            return (result != null, result);
+            return _db.FindById(id);
         }
 
         public async Task<bool> TryRemove(string sessionId)

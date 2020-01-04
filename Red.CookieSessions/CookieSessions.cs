@@ -55,8 +55,7 @@ namespace Red.CookieSessions
         public CookieSessions(TimeSpan sessionLength)
         {
             SessionLength = sessionLength;
-            _expiredCookie =
-                $"{TokenName}=; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age={(int) SessionLength.TotalSeconds};";
+            _expiredCookie = $"{TokenName}=; Expires=Thu, 01 Jan 1970 00:00:00 GMT;";
             ReapLoop();
         }
 
@@ -86,7 +85,7 @@ namespace Red.CookieSessions
         /// <summary>
         ///     Do not invoke. Is invoked by the server with every websocket request
         /// </summary>
-        public Task<HandlerType> Invoke(Request req, WebSocketDialog wsd, Response res) => Authenticate(req, res);
+        public Task<HandlerType> Invoke(Request req, WebSocketDialog _, Response res) => Authenticate(req, res);
 
         /// <summary>
         ///     Do not invoke. Is invoked by the server with every request
@@ -116,8 +115,8 @@ namespace Red.CookieSessions
                 return HandlerType.Continue;
             }
 
-            var (sucess, session) = await TryAuthenticateToken(req.Cookies[TokenName]);
-            if (!sucess)
+            var session = await TryAuthenticateToken(req.Cookies[TokenName]);
+            if (session == null)
             {
                 res.AspNetResponse.Headers["Set-Cookie"] = _expiredCookie;
                 return HandlerType.Continue;
@@ -132,14 +131,15 @@ namespace Red.CookieSessions
             return HandlerType.Continue;
         }
 
-        private async Task<(bool sucess, TCookieSession found)> TryAuthenticateToken(string token)
+        private async Task<TCookieSession?> TryAuthenticateToken(string token)
         {
-            var (success, found) = await Store.TryGet(token);
-            if (!success || found.Expiration <= DateTime.Now)
+            var found = await Store.TryGet(token);
+            if (found == null || found.Expiration <= DateTime.Now)
             {
-                return (false, null);
+                return null;
             }
-            return (true, found);
+
+            return found;
         }
 
         private string GenerateToken()
@@ -154,21 +154,25 @@ namespace Red.CookieSessions
             return id.ToString();
         }
 
-        internal async Task<string> OpenSession(TCookieSession session) 
+        internal Task<string> OpenSession(TCookieSession session) 
         {
             session.Id = GenerateToken();
-            session.Expiration = DateTime.UtcNow.Add(SessionLength);
-            await Store.Set(session);
-            return $"{TokenName}={session.Id}; {GenerateCookie()} Expires={session.Expiration:R}";
+            return SetSession(session);
         }
 
-        internal async Task<string> RenewSession(TCookieSession session)
+        internal Task<string> RenewSession(TCookieSession session)
+        {
+            return SetSession(session);
+        }
+
+        private async Task<string> SetSession(TCookieSession session)
         {
             session.Expiration = DateTime.UtcNow.Add(SessionLength);
             await Store.Set(session);
             return $"{TokenName}={session.Id}; {GenerateCookie()} Expires={session.Expiration:R}";
         }
-
+        
+        
         internal Task<bool> CloseSession(TCookieSession session, out string cookie)
         {
             cookie = _expiredCookie;

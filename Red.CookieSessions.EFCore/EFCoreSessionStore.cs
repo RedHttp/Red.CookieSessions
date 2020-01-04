@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,46 +10,51 @@ namespace Red.CookieSessions.EFCore
     public class EFCoreSessionStore<TSession> : ICookieStore<TSession>
         where TSession : class, ICookieSession, new()
     {
-        private readonly DbContext _db;
+        private readonly Func<DbContext> _getContext;
 
-        public EFCoreSessionStore(DbContext dbContext)
+        public EFCoreSessionStore(Func<DbContext> getContextContext)
         {
-            _db = dbContext;
+            _getContext = getContextContext;
         }
 
 
-        public async Task<ValueTuple<bool, TSession>> TryGet(string sessionId)
+        public async Task<TSession?> TryGet(string sessionId)
         {
-            var result = await _db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == sessionId);
-            return (result != null, result);
+            await using var db = _getContext();
+            return await db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == sessionId);
         }
 
         public async Task<bool> TryRemove(string sessionId)
         {
-            var result = await _db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == sessionId);
-            if (result == default) return true;
-            _db.Set<TSession>().Remove(result);
-            await _db.SaveChangesAsync();
+            await using var db = _getContext();
+            var result = await db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == sessionId);
+            if (result == default)
+                return false;
+            
+            db.Set<TSession>().Remove(result);
+            await db.SaveChangesAsync();
             return true;
         }
 
         public async Task Set(TSession session)
         {
-            var result = await _db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == session.Id);
+            await using var db = _getContext();
+            var result = await db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == session.Id);
             if (result != default)
             {
-                _db.Remove(result);
+                db.Remove(result);
             }
-            _db.Add(session);
-            await _db.SaveChangesAsync();
+            db.Add(session);
+            await db.SaveChangesAsync();
         }
 
         public async Task RemoveExpired()
         {
+            await using var db = _getContext();
             var now = DateTime.UtcNow;
-            var expired = _db.Set<TSession>().Where(s => s.Expiration <= now);
-            _db.RemoveRange(expired);
-            await _db.SaveChangesAsync();
+            var expired = db.Set<TSession>().Where(s => s.Expiration <= now);
+            db.RemoveRange(expired);
+            await db.SaveChangesAsync();
         }
     }
 }

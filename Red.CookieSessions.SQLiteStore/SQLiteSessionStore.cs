@@ -5,7 +5,7 @@ using SQLite;
 namespace Red.CookieSessions.SQLiteStore
 {
     public class SQLiteSessionStore<T> : ICookieStore<T>
-        where T : ICookieSession, new()
+        where T : class, ICookieSession, new()
     {
         private readonly SQLiteAsyncConnection _db;
 
@@ -15,10 +15,9 @@ namespace Red.CookieSessions.SQLiteStore
         }
 
 
-        public async Task<ValueTuple<bool, T>> TryGet(string id)
+        public async Task<T?> TryGet(string id)
         {
-            var result = await _db.GetAsync<T>(id);
-            return (result != null, result);
+            return await _db.GetAsync<T>(id);
         }
 
         public async Task<bool> TryRemove(string sessionId)

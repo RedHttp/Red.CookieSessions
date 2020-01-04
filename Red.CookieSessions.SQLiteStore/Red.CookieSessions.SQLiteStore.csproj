@@ -6,19 +6,21 @@
         <Title>Red.CookieSessions.SQLiteStore</Title>
         <Authors>Malte Rosenbjerg</Authors>
         <Description>A SQLite session store for Red.CookieSessions, to persists sessions</Description>
-        <Copyright>Copyright © Rosenbjerg 2019</Copyright>
+        <Copyright>Copyright © Rosenbjerg 2020</Copyright>
         <PackageProjectUrl>https://github.com/RedHttp/Red.CookieSessions</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/RedHttp/Red.CookieSessions/blob/master/LICENSE.md</PackageLicenseUrl>
         <PackageIconUrl>https://redhttp.github.io/Red/assets/red-large.png</PackageIconUrl>
         <RepositoryUrl>https://github.com/RedHttp/Red.CookieSessions</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>red redhttp redhttpserver cookiesession session rhttp rhttpserver sqlite session store</PackageTags>
-        <PackageReleaseNotes>Updated Red.CookieSessions dependency</PackageReleaseNotes>
-        <PackageVersion>1.1.0</PackageVersion>
+        <PackageReleaseNotes>Updated Red.CookieSessions to v5</PackageReleaseNotes>
+        <PackageVersion>2.0.0</PackageVersion>
+        <LangVersion>8</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Red.CookieSessions" Version="4.0.1" />
+      <PackageReference Include="Red.CookieSessions" Version="5.0.0" />
       <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     </ItemGroup>
 

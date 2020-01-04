@@ -5,7 +5,7 @@
     <Authors>Malte Rosenbjerg</Authors>
     <Company />
     <Description>Simple session management middleware for RedHttpServer. Uses cookies with authentication tokens</Description>
-    <Copyright>Copyright © Rosenbjerg 2019</Copyright>
+    <Copyright>Copyright © Rosenbjerg 2020</Copyright>
     <Product>Red.CookieSessions</Product>
     <PackageLicenseUrl>https://github.com/rosenbjerg/Red.CookieSessions/blob/master/LICENSE.md</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/rosenbjerg/Red.CookieSessions</PackageProjectUrl>
@@ -14,10 +14,11 @@
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>red redhttp redhttpserver cookiesession session rhttp rhttpserver</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>API Change: extension methods moved to Response</PackageReleaseNotes>
-    <LangVersion>7.3</LangVersion>
-    <PackageVersion>4.0.1</PackageVersion>
+    <PackageReleaseNotes>API changes</PackageReleaseNotes>
+    <LangVersion>8</LangVersion>
+    <PackageVersion>5.0.0</PackageVersion>
     <Title>Red.CookieSessions</Title>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="RHttpServer" Version="4.0.2" />

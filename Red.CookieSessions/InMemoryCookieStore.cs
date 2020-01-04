@@ -24,10 +24,10 @@ namespace Red.CookieSessions
             _sessions[session.Id] = session;
         }
 
-        public async Task<(bool, TCookieSession)> TryGet(string id)
+        public async Task<TCookieSession> TryGet(string id)
         {
-            var success = _sessions.TryGetValue(id, out var session);
-            return (success, session);
+            _sessions.TryGetValue(id, out var session);
+            return session;
         }
 
         public async Task<bool> TryRemove(string sessionId)

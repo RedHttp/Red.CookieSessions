@@ -6,20 +6,22 @@
         <Title>Red.CookieSessions.EFCore</Title>
         <Authors>Malte Rosenbjerg</Authors>
         <Description>A EntityFrameworkCore session store for Red.CookieSessions, to persists sessions</Description>
-        <Copyright>Copyright © Rosenbjerg 2019</Copyright>
+        <Copyright>Copyright © Rosenbjerg 2020</Copyright>
         <PackageProjectUrl>https://github.com/rosenbjerg/Red.CookieSessions</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/rosenbjerg/Red.CookieSessions/blob/master/LICENSE.md</PackageLicenseUrl>
         <PackageIconUrl>https://redhttp.github.io/Red/assets/red-large.png</PackageIconUrl>
         <RepositoryUrl>https://github.com/rosenbjerg/Red.CookieSessions</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>red redhttp redhttpserver cookiesession session rhttp rhttpserver efcore session store</PackageTags>
-        <PackageReleaseNotes>Use AsNoTracking to avoid wasting time on creating EF proxy objects</PackageReleaseNotes>
-        <PackageVersion>1.1.0</PackageVersion>
+        <PackageReleaseNotes>Use context getter function instead of context directly</PackageReleaseNotes>
+        <PackageVersion>3.1.0</PackageVersion>
+        <LangVersion>8</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
-      <PackageReference Include="Red.CookieSessions" Version="4.0.1" />
+      <PackageReference Include="Red.CookieSessions" Version="5.0.0" />
     </ItemGroup>
 
 </Project>
