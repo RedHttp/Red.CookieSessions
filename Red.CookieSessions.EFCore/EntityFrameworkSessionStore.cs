@@ -11,23 +11,27 @@ namespace Red.CookieSessions.EFCore
         where TSession : class, ICookieSession, new()
     {
         private readonly Func<DbContext> _getContext;
+        private readonly bool _asNoTracking;
 
-        public EntityFrameworkSessionStore(Func<DbContext> getContextContext)
+        public EntityFrameworkSessionStore(Func<DbContext> getContextContext, bool asNoTracking = false)
         {
             _getContext = getContextContext;
+            _asNoTracking = asNoTracking;
         }
 
 
         public async Task<TSession?> TryGet(string sessionId)
         {
             await using var db = _getContext();
-            return await db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == sessionId);
+            var queryable = _asNoTracking ? db.Set<TSession>().AsNoTracking() : db.Set<TSession>();
+            return await queryable.FirstOrDefaultAsync(s => s.Id == sessionId);
         }
 
         public async Task<bool> TryRemove(string sessionId)
         {
             await using var db = _getContext();
-            var result = await db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == sessionId);
+            var queryable = _asNoTracking ? db.Set<TSession>().AsNoTracking() : db.Set<TSession>();
+            var result = await queryable.FirstOrDefaultAsync(s => s.Id == sessionId);
             if (result == default)
                 return false;
             
@@ -39,7 +43,8 @@ namespace Red.CookieSessions.EFCore
         public async Task Set(TSession session)
         {
             await using var db = _getContext();
-            var result = await db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == session.Id);
+            var queryable = _asNoTracking ? db.Set<TSession>().AsNoTracking() : db.Set<TSession>();
+            var result = await queryable.FirstOrDefaultAsync(s => s.Id == session.Id);
             if (result != default)
             {
                 db.Remove(result);
