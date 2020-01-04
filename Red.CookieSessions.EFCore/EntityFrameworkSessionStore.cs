@@ -10,38 +10,36 @@ namespace Red.CookieSessions.EFCore
     public class EntityFrameworkSessionStore<TSession> : ICookieStore<TSession>
         where TSession : class, ICookieSession, new()
     {
-        private readonly Func<DbContext> _resolveContextFunc;
+        private readonly Func<DbContext> _getContext;
 
-        private DbContext GetDb() => _resolveContextFunc();
-        public EntityFrameworkSessionStore(Func<DbContext> resolveContext)
+        public EntityFrameworkSessionStore(Func<DbContext> getContextContext)
         {
-            _resolveContextFunc = resolveContext;
+            _getContext = getContextContext;
         }
 
 
         public async Task<TSession?> TryGet(string sessionId)
         {
-            return await GetDb().Set<TSession>().FindAsync(sessionId);
+            await using var db = _getContext();
+            return await db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == sessionId);
         }
 
         public async Task<bool> TryRemove(string sessionId)
         {
-            var db = GetDb();
-            var result = await db.Set<TSession>().FindAsync(sessionId);
-            if (result != default)
-            {
-                db.Set<TSession>().Remove(result);
-                await db.SaveChangesAsync();
-                return true;
-            }
-
-            return false;
+            await using var db = _getContext();
+            var result = await db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == sessionId);
+            if (result == default)
+                return false;
+            
+            db.Set<TSession>().Remove(result);
+            await db.SaveChangesAsync();
+            return true;
         }
 
         public async Task Set(TSession session)
         {
-            var db = GetDb();
-            var result = await db.Set<TSession>().FindAsync(session.Id);
+            await using var db = _getContext();
+            var result = await db.Set<TSession>().AsNoTracking().FirstOrDefaultAsync(s => s.Id == session.Id);
             if (result != default)
             {
                 db.Remove(result);
@@ -52,9 +50,9 @@ namespace Red.CookieSessions.EFCore
 
         public async Task RemoveExpired()
         {
-            var db = GetDb();
+            await using var db = _getContext();
             var now = DateTime.UtcNow;
-            var expired = await db.Set<TSession>().Where(s => s.Expiration <= now).ToListAsync();
+            var expired = db.Set<TSession>().Where(s => s.Expiration <= now);
             db.RemoveRange(expired);
             await db.SaveChangesAsync();
         }

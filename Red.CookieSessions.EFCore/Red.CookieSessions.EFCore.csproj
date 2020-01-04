@@ -13,8 +13,8 @@
         <RepositoryUrl>https://github.com/rosenbjerg/Red.CookieSessions</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>red redhttp redhttpserver cookiesession session rhttp rhttpserver efcore session store</PackageTags>
-        <PackageReleaseNotes>Use context getter function instead of context directly</PackageReleaseNotes>
-        <PackageVersion>3.1.0</PackageVersion>
+        <PackageReleaseNotes>Remove old class</PackageReleaseNotes>
+        <PackageVersion>3.2.0</PackageVersion>
         <LangVersion>8</LangVersion>
         <Nullable>enable</Nullable>
     </PropertyGroup>
