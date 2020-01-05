@@ -13,7 +13,7 @@
         <RepositoryUrl>https://github.com/rosenbjerg/Red.CookieSessions</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>red redhttp redhttpserver cookiesession session rhttp rhttpserver efcore session store</PackageTags>
-        <PackageReleaseNotes>Make AsNoTracking optional</PackageReleaseNotes>
+        <PackageReleaseNotes>Added ability to specify includes</PackageReleaseNotes>
         <PackageVersion>3.3.0</PackageVersion>
         <LangVersion>8</LangVersion>
         <Nullable>enable</Nullable>

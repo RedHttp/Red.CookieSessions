@@ -11,27 +11,30 @@ namespace Red.CookieSessions.EFCore
         where TSession : class, ICookieSession, new()
     {
         private readonly Func<DbContext> _getContext;
-        private readonly bool _asNoTracking;
+        private readonly Expression<Func<TSession, object>>[] _includes;
 
-        public EntityFrameworkSessionStore(Func<DbContext> getContextContext, bool asNoTracking = false)
+        public EntityFrameworkSessionStore(Func<DbContext> getContextContext, params Expression<Func<TSession, object>>[] includes)
         {
             _getContext = getContextContext;
-            _asNoTracking = asNoTracking;
+            _includes = includes;
         }
 
+
+        private IQueryable<TSession> WithIncludes(DbContext context)
+        {
+            return _includes.Aggregate(context.Set<TSession>().AsNoTracking(), (current, expression) => current.Include(expression));
+        }
 
         public async Task<TSession?> TryGet(string sessionId)
         {
             await using var db = _getContext();
-            var queryable = _asNoTracking ? db.Set<TSession>().AsNoTracking() : db.Set<TSession>();
-            return await queryable.FirstOrDefaultAsync(s => s.Id == sessionId);
+            return await WithIncludes(db).FirstOrDefaultAsync(s => s.Id == sessionId);
         }
 
         public async Task<bool> TryRemove(string sessionId)
         {
             await using var db = _getContext();
-            var queryable = _asNoTracking ? db.Set<TSession>().AsNoTracking() : db.Set<TSession>();
-            var result = await queryable.FirstOrDefaultAsync(s => s.Id == sessionId);
+            var result = await WithIncludes(db).FirstOrDefaultAsync(s => s.Id == sessionId);
             if (result == default)
                 return false;
             
@@ -43,12 +46,10 @@ namespace Red.CookieSessions.EFCore
         public async Task Set(TSession session)
         {
             await using var db = _getContext();
-            var queryable = _asNoTracking ? db.Set<TSession>().AsNoTracking() : db.Set<TSession>();
-            var result = await queryable.FirstOrDefaultAsync(s => s.Id == session.Id);
+            var result = await WithIncludes(db).FirstOrDefaultAsync(s => s.Id == session.Id);
             if (result != default)
-            {
                 db.Remove(result);
-            }
+            
             db.Add(session);
             await db.SaveChangesAsync();
         }
@@ -57,7 +58,7 @@ namespace Red.CookieSessions.EFCore
         {
             await using var db = _getContext();
             var now = DateTime.UtcNow;
-            var expired = db.Set<TSession>().Where(s => s.Expiration <= now);
+            var expired = await db.Set<TSession>().Where(s => s.Expiration <= now).ToListAsync();
             db.RemoveRange(expired);
             await db.SaveChangesAsync();
         }
