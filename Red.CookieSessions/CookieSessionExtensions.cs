@@ -13,7 +13,7 @@ namespace Red.CookieSessions
             where TCookieSession : class, ICookieSession, new()
         {
             var context = response.Context;
-            var existing = context.Request.GetData<TCookieSession>();
+            var existing = context.GetData<TCookieSession>();
             if (existing != default)
             {
                 await response.CloseSession(existing);
@@ -21,7 +21,7 @@ namespace Red.CookieSessions
 
             var manager = context.Plugins.Get<CookieSessions<TCookieSession>>();
             var cookie = await manager.OpenSession(session);
-            response.AspNetResponse.Headers["Set-Cookie"] = cookie;
+            response.Headers["Set-Cookie"] = cookie;
         }
 
         /// <summary>
@@ -32,10 +32,21 @@ namespace Red.CookieSessions
         public static async Task RenewSession<TCookieSession>(this Response response, TCookieSession session)  
             where TCookieSession : class, ICookieSession, new()
         {
-            var context = response.Context;
-            var manager = context.Plugins.Get<CookieSessions<TCookieSession>>();
+            var manager = response.Context.Plugins.Get<CookieSessions<TCookieSession>>();
             var newCookie = await manager.RenewSession(session);
-            response.AspNetResponse.Headers["Set-Cookie"] = newCookie;
+            response.Headers["Set-Cookie"] = newCookie;
+        }
+        
+        /// <summary>
+        ///    Saves changes to the session object without renewing the expiration
+        /// </summary>
+        /// <param name="session"></param>
+        /// <param name="response"></param>
+        public static async Task Resave<TCookieSession>(this Response response, TCookieSession session)  
+            where TCookieSession : class, ICookieSession, new()
+        {
+            var manager = response.Context.Plugins.Get<CookieSessions<TCookieSession>>();
+            await manager.RenewSession(session);
         }
 
         /// <summary>
@@ -46,10 +57,9 @@ namespace Red.CookieSessions
         public static async Task CloseSession<TCookieSession>(this Response response, TCookieSession session)  
             where TCookieSession : class, ICookieSession, new()
         {
-            var context = response.Context;
-            var manager = context.Plugins.Get<CookieSessions<TCookieSession>>();
+            var manager = response.Context.Plugins.Get<CookieSessions<TCookieSession>>();
             await manager.CloseSession(session, out var cookie);
-            response.AspNetResponse.Headers["Set-Cookie"] = cookie;
+            response.Headers["Set-Cookie"] = cookie;
         }
     }
 }

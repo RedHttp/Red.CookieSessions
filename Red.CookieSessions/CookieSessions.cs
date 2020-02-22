@@ -85,7 +85,7 @@ namespace Red.CookieSessions
         /// <summary>
         ///     Do not invoke. Is invoked by the server with every websocket request
         /// </summary>
-        public Task<HandlerType> Invoke(Request req, WebSocketDialog _, Response res) => Authenticate(req, res);
+        public Task<HandlerType> Invoke(Request req, Response res, WebSocketDialog _) => Authenticate(req, res);
 
         /// <summary>
         ///     Do not invoke. Is invoked by the server with every request
@@ -93,9 +93,9 @@ namespace Red.CookieSessions
         public Task<HandlerType> Invoke(Request req, Response res) => Authenticate(req, res);
 
         // Simple maintainer loop
-        private async void ReapLoop()
+        private async Task ReapLoop()
         {
-            while (true)
+            while (ReapInterval != default)
             {
                 await Store.RemoveExpired();
                 await Task.Delay(ReapInterval);
@@ -111,9 +111,7 @@ namespace Red.CookieSessions
         public async Task<HandlerType> Authenticate(Request req, Response res)
         {
             if (!req.Cookies.TryGetValue(TokenName, out var token) || token == "")
-            {
                 return HandlerType.Continue;
-            }
 
             var session = await TryAuthenticateToken(req.Cookies[TokenName]);
             if (session == null)
@@ -123,9 +121,7 @@ namespace Red.CookieSessions
             }
 
             if (AutoRenew)
-            {
                 await res.RenewSession(session);
-            }
             
             req.SetData(session);
             return HandlerType.Continue;
@@ -157,17 +153,17 @@ namespace Red.CookieSessions
         internal Task<string> OpenSession(TCookieSession session) 
         {
             session.Id = GenerateToken();
-            return SetSession(session);
+            return RenewSession(session);
         }
 
         internal Task<string> RenewSession(TCookieSession session)
         {
+            session.Expiration = DateTime.UtcNow.Add(SessionLength);
             return SetSession(session);
         }
 
-        private async Task<string> SetSession(TCookieSession session)
+        internal async Task<string> SetSession(TCookieSession session)
         {
-            session.Expiration = DateTime.UtcNow.Add(SessionLength);
             await Store.Set(session);
             return $"{TokenName}={session.Id}; {GenerateCookie()} Expires={session.Expiration:R}";
         }

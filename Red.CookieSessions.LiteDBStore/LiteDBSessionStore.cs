@@ -7,7 +7,7 @@ namespace Red.CookieSessions.LiteDBStore
     public class LiteDBSessionStore<T> : ICookieStore<T>
         where T : class, ICookieSession, new()
     {
-        private readonly LiteCollection<T> _db;
+        private readonly ILiteCollection<T> _db;
 
         public LiteDBSessionStore(LiteDatabase db)
         {
@@ -33,7 +33,7 @@ namespace Red.CookieSessions.LiteDBStore
         public async Task RemoveExpired()
         {
             var now = DateTime.UtcNow;
-            _db.Delete(s => s.Expiration <= now);
+            _db.DeleteMany(s => s.Expiration <= now);
         }
     }
 }

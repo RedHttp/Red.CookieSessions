@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using StackExchange.Redis;
 
-namespace Red.CookieSessions.RedisSessionStore
+namespace Red.CookieSessions.RedisStore
 {
     public class RedisSessionStore<T> : ICookieStore<T>
         where T : class, ICookieSession, new()

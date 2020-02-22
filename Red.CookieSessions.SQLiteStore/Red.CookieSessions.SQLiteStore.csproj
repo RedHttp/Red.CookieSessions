@@ -1,26 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Red.CookieSessions.SQLiteStore</Title>
         <Authors>Malte Rosenbjerg</Authors>
         <Description>A SQLite session store for Red.CookieSessions, to persists sessions</Description>
         <Copyright>Copyright © Rosenbjerg 2020</Copyright>
         <PackageProjectUrl>https://github.com/RedHttp/Red.CookieSessions</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/RedHttp/Red.CookieSessions/blob/master/LICENSE.md</PackageLicenseUrl>
+        <PackageLicense>MIT</PackageLicense>
         <PackageIconUrl>https://redhttp.github.io/Red/assets/red-large.png</PackageIconUrl>
         <RepositoryUrl>https://github.com/RedHttp/Red.CookieSessions</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>red redhttp redhttpserver cookiesession session rhttp rhttpserver sqlite session store</PackageTags>
-        <PackageReleaseNotes>Updated Red.CookieSessions to v5</PackageReleaseNotes>
-        <PackageVersion>2.0.0</PackageVersion>
+        <PackageReleaseNotes>Upgrade dependencies</PackageReleaseNotes>
+        <PackageVersion>3.0.0</PackageVersion>
+        <Version>3.0.0</Version>
         <LangVersion>8</LangVersion>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Red.CookieSessions" Version="5.0.0" />
+      <PackageReference Include="Red.CookieSessions" Version="5.1.0" />
       <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     </ItemGroup>
 
