@@ -21,6 +21,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="RHttpServer" Version="5.1.0" />
+    <PackageReference Include="RHttpServer" Version="5.2.1" />
   </ItemGroup>
 </Project>
