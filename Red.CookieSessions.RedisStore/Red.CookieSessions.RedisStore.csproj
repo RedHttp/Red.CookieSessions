@@ -22,7 +22,7 @@
 
     <ItemGroup>
       <PackageReference Include="Red.CookieSessions" Version="5.1.0" />
-      <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+      <PackageReference Include="StackExchange.Redis" Version="2.1.0" />
       <PackageReference Include="System.Text.Json" Version="4.7.1" />
     </ItemGroup>
 
