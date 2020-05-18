@@ -22,7 +22,7 @@
 
     <ItemGroup>
       <PackageReference Include="Red.CookieSessions" Version="5.1.0" />
-      <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+      <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     </ItemGroup>
 
 </Project>
