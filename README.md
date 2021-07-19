@@ -1,3 +1,5 @@
+## The RedHttp project is no longer maintained. See [Carter](https://github.com/CarterCommunity/Carter) for a similar low-ceremony experience.
+
 # Cookie Sessions for RedHttpServer
 ### Simple session management middleware for Red. 
 [![GitHub](https://img.shields.io/github/license/redhttp/red.cookiesessions)](https://github.com/RedHttp/Red.CookieSessions/blob/master/LICENSE.md)
